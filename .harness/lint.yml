@@ -6,18 +6,21 @@ pipeline:
   tags: {}
   stages:
     - stage:
-        name: validate
-        identifier: validate
+        name: wut
+        identifier: wut
         description: ""
-        type: Dynamic
+        type: Custom
         spec:
-          sourceConfig:
-            type: Git
-            spec:
-              connectorRef: account.Github_OAuth_1778872954712
-              repoName: jweberv/tetris
-              branchName: main
-              filePath: lint.yml
+          execution:
+            steps:
+              - step:
+                  type: Email
+                  name: Email_1
+                  identifier: Email_1
+                  spec:
+                    to: jonathan.weber@harness.io
+                    cc: ""
+                    subject: hello world
+                    body: pipeline2/tetris project
+                  timeout: 10m
         tags: {}
-        when:
-          pipelineStatus: Success
