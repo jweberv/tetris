@@ -4,38 +4,7 @@ pipeline:
   projectIdentifier: default_project
   orgIdentifier: default
   tags: {}
-  properties:
-    ci:
-      codebase:
-        connectorRef: account.Github_OAuth_1778872954712
-        repoName: jweberv/tetris
-        build: <+input>
   stages:
-    - stage:
-        name: build-clone
-        identifier: buildclone
-        description: ""
-        type: CI
-        spec:
-          cloneCodebase: true
-          caching:
-            enabled: true
-            override: true
-          buildIntelligence:
-            enabled: true
-          platform:
-            os: MacOS
-            arch: Arm64
-          runtime:
-            type: Cloud
-            spec: {}
-          execution:
-            steps:
-              - step:
-                  type: Test
-                  name: Test_1
-                  identifier: Test_1
-                  spec: {}
     - stage:
         name: validate
         identifier: validate
