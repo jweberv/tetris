@@ -1,0 +1,43 @@
+pipeline:
+  name: Tetris Lint
+  identifier: TetrisLint
+  orgIdentifier: default
+  projectIdentifier: default
+  stages:
+    - stage:
+        name: Lint
+        identifier: Lint
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Lint HTML
+                  identifier: LintHTML
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: node:20
+                    command: |
+                      npm install -g htmlhint
+                      htmlhint tetris.html
+              - step:
+                  type: Run
+                  name: Lint JavaScript
+                  identifier: LintJS
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: node:20
+                    command: |
+                      npm install -g eslint
+                      eslint --no-eslintrc --rule '{"no-undef": "warn", "no-unused-vars": "warn"}' tetris.html --plugin html || true
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.github
+        repoName: tetris
+        build:
+          type: branch
+          spec:
+            branch: <+input>
