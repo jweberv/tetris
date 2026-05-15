@@ -1,0 +1,101 @@
+.gameContainer {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.canvas {
+  border: 2px solid #444;
+  background: #0f0f1a;
+  display: block;
+}
+
+.sidebar {
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.panel {
+  background: #0f0f1a;
+  border: 2px solid #444;
+  padding: 12px;
+  border-radius: 4px;
+}
+
+.panel h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.value {
+  font-size: 22px;
+  font-weight: bold;
+  color: #e0e0ff;
+}
+
+.nextCanvas {
+  display: block;
+  margin: 0 auto;
+}
+
+.controls {
+  font-size: 11px;
+  color: #666;
+  line-height: 1.8;
+}
+
+.controls span {
+  color: #aaa;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  z-index: 10;
+}
+
+.overlay h1 {
+  font-size: 48px;
+  letter-spacing: 6px;
+  color: #e0e0ff;
+  font-family: 'Courier New', monospace;
+}
+
+.overlay p {
+  color: #888;
+  font-size: 14px;
+}
+
+.overlay button {
+  margin-top: 8px;
+  padding: 10px 32px;
+  background: #3a3a6e;
+  border: 2px solid #6666cc;
+  color: #e0e0ff;
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.overlay button:hover {
+  background: #5555aa;
+}
+
+.scoreDisplay {
+  font-size: 20px;
+  color: #aaa;
+}
