@@ -6,6 +6,34 @@ pipeline:
   tags: {}
   stages:
     - stage:
+        name: BuildTest
+        identifier: BuildTest
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+            override: true
+          buildIntelligence:
+            enabled: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_2
+                  identifier: Run_2
+                  spec:
+                    shell: Bash
+                    command: npm run dev
+                  description: build and test
+    - stage:
         name: wut
         identifier: wut
         description: ""
@@ -24,3 +52,9 @@ pipeline:
                     body: pipeline2/tetris project
                   timeout: 10m
         tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github_OAuth_1778872954712
+        repoName: jweberv/tetris
+        build: <+input>
