@@ -1,0 +1,105 @@
+/*!****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./components/TetrisGame.module.css ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************/
+.TetrisGame_gameContainer__3ABGc {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.TetrisGame_canvas__Mmi5b {
+  border: 2px solid #444;
+  background: #0f0f1a;
+  display: block;
+}
+
+.TetrisGame_sidebar__3hCur {
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.TetrisGame_panel__Qvkvd {
+  background: #0f0f1a;
+  border: 2px solid #444;
+  padding: 12px;
+  border-radius: 4px;
+}
+
+.TetrisGame_panel__Qvkvd h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.TetrisGame_value__QXz3w {
+  font-size: 22px;
+  font-weight: bold;
+  color: #e0e0ff;
+}
+
+.TetrisGame_nextCanvas__jjsxL {
+  display: block;
+  margin: 0 auto;
+}
+
+.TetrisGame_controls__eH5Le {
+  font-size: 11px;
+  color: #666;
+  line-height: 1.8;
+}
+
+.TetrisGame_controls__eH5Le span {
+  color: #aaa;
+}
+
+.TetrisGame_overlay__upf7y {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  z-index: 10;
+}
+
+.TetrisGame_overlay__upf7y h1 {
+  font-size: 48px;
+  letter-spacing: 6px;
+  color: #e0e0ff;
+  font-family: 'Courier New', monospace;
+}
+
+.TetrisGame_overlay__upf7y p {
+  color: #888;
+  font-size: 14px;
+}
+
+.TetrisGame_overlay__upf7y button {
+  margin-top: 8px;
+  padding: 10px 32px;
+  background: #3a3a6e;
+  border: 2px solid #6666cc;
+  color: #e0e0ff;
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.TetrisGame_overlay__upf7y button:hover {
+  background: #5555aa;
+}
+
+.TetrisGame_scoreDisplay__SMkbt {
+  font-size: 20px;
+  color: #aaa;
+}
+
