@@ -1,22 +1,15 @@
 pipeline:
-  name: pipeline2
+  name: Tetris CI
   identifier: pipeline2
-  projectIdentifier: default_project
   orgIdentifier: default
-  tags: {}
+  projectIdentifier: default_project
   stages:
     - stage:
-        name: BuildTest
-        identifier: BuildTest
-        description: ""
+        name: Build and E2E
+        identifier: BuildAndE2E
         type: CI
         spec:
           cloneCodebase: true
-          caching:
-            enabled: true
-            override: true
-          buildIntelligence:
-            enabled: true
           platform:
             os: Linux
             arch: Amd64
@@ -27,34 +20,47 @@ pipeline:
             steps:
               - step:
                   type: Run
-                  name: Run_2
-                  identifier: Run_2
+                  name: Install dependencies
+                  identifier: InstallDeps
                   spec:
-                    shell: Bash
-                    command: npm run dev
-                  description: build and test
-    - stage:
-        name: wut
-        identifier: wut
-        description: ""
-        type: Custom
-        spec:
-          execution:
-            steps:
+                    connectorRef: account.harnessImage
+                    image: node:20
+                    command: |
+                      npm ci
               - step:
-                  type: Email
-                  name: Email_1
-                  identifier: Email_1
+                  type: Run
+                  name: Build Next.js
+                  identifier: BuildNext
                   spec:
-                    to: jonathan.weber@harness.io
-                    cc: ""
-                    subject: hello world
-                    body: pipeline2/tetris project
-                  timeout: 10m
-        tags: {}
+                    connectorRef: account.harnessImage
+                    image: node:20
+                    command: |
+                      npm run build
+              - step:
+                  type: Run
+                  name: Install Playwright browsers
+                  identifier: InstallPlaywrightBrowsers
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: node:20
+                    command: |
+                      npx playwright install --with-deps
+              - step:
+                  type: Run
+                  name: Run Playwright E2E
+                  identifier: RunPlaywrightE2E
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: node:20
+                    command: |
+                      export CI=true
+                      npm run test:e2e
   properties:
     ci:
       codebase:
-        connectorRef: account.Github_OAuth_1778872954712
-        repoName: jweberv/tetris
-        build: <+input>
+        connectorRef: account.github
+        repoName: tetris
+        build:
+          type: branch
+          spec:
+            branch: <+input>
