@@ -37,4 +37,4 @@ pipeline:
                   identifier: Run_1
                   spec:
                     shell: Sh
-                    command: npm run dev
+                    command: open tetris.html
