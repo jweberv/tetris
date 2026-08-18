@@ -1,0 +1,21 @@
+name: tetris
+replicas: 2
+
+# Swap this for <+artifact.image> once an artifact source is wired up in the service.
+image: nginx:stable-alpine
+
+createNamespace: true
+namespace: <+infra.namespace>
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 80
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
