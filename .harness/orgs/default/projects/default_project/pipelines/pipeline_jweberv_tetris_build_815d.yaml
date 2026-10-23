@@ -1,0 +1,48 @@
+pipeline:
+  id: pipeline_jweberv_tetris_build_815d
+  name: pipeline_jweberv_tetris_build_815d
+  stages:
+    - name: build_and_test
+      id: build_and_test
+      runtime: cloud
+      platform:
+        os: linux
+        arch: amd64
+      clone:
+        enabled: true
+      cache:
+        enabled: true
+      steps:
+        - name: Setup Node
+          id: setup_node
+          template:
+            uses: setupNode@1.0.1
+        - name: Install Dependencies
+          id: install_deps
+          run:
+            shell: bash
+            script: |-
+              node --version
+              npm --version
+              npm ci
+              npx playwright install --with-deps chromium
+        - name: Build
+          id: build
+          run:
+            shell: bash
+            script: npm run build
+        - name: Test
+          id: test
+          run:
+            shell: bash
+            env:
+              CI: "true"
+            script: |-
+              mkdir -p .harness/reports
+              PLAYWRIGHT_JUNIT_OUTPUT_NAME=.harness/reports/junit.xml npx playwright test --reporter=junit
+            report:
+              type: junit
+              paths:
+                - .harness/reports/junit.xml
+  tags:
+    onboarding: "true"
