@@ -1,5 +1,7 @@
 import TetrisGame from '@/components/TetrisGame';
+import { readGitLog } from '@/lib/gitlog';
 
 export default function Home() {
-  return <TetrisGame />;
+  const commits = readGitLog();
+  return <TetrisGame commits={commits} />;
 }
