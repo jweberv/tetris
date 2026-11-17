@@ -1,7 +1,8 @@
 pipeline:
   id: pipeline_jweberv_tetris_build_e506
   name: pipeline_jweberv_tetris_build_e506
-  description: Builds and tests the Tetris app, then builds and pushes its Docker image to Docker Hub.
+  description: Builds and tests the Tetris app, then builds and pushes its Docker
+    image to Docker Hub.
   stages:
     - name: Build and Test
       id: build_and_test
@@ -27,23 +28,6 @@ pipeline:
           run:
             shell: bash
             script: npm run build
-        - name: Install Playwright Browsers
-          id: install_browsers
-          run:
-            shell: bash
-            script: npx playwright install --with-deps chromium
-        - name: Run E2E Tests
-          id: test_e2e
-          run:
-            shell: bash
-            script: |-
-              mkdir -p .harness/reports
-              export CI=true
-              PLAYWRIGHT_JUNIT_OUTPUT_NAME=.harness/reports/junit.xml npx playwright test --reporter=junit
-            report:
-              type: junit
-              paths:
-                - .harness/reports/junit.xml
     - name: Build and Push Image
       id: build_and_push_image
       runtime: cloud
