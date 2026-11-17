@@ -1,0 +1,47 @@
+pipeline:
+  id: pipeline_jweberv_tetris_build_e506
+  name: pipeline_jweberv_tetris_build_e506
+  stages:
+    - name: Build and Test
+      id: build_and_test
+      runtime: cloud
+      platform:
+        os: linux
+        arch: amd64
+      clone:
+        enabled: true
+      cache:
+        enabled: true
+      steps:
+        - name: Install Dependencies
+          id: install_deps
+          run:
+            shell: bash
+            script: |-
+              node --version
+              npm --version
+              npm ci
+        - name: Build
+          id: build
+          run:
+            shell: bash
+            script: npm run build
+        - name: Install Playwright Browsers
+          id: install_browsers
+          run:
+            shell: bash
+            script: npx playwright install --with-deps chromium
+        - name: Run E2E Tests
+          id: test_e2e
+          run:
+            shell: bash
+            script: |-
+              mkdir -p .harness/reports
+              export CI=true
+              PLAYWRIGHT_JUNIT_OUTPUT_NAME=.harness/reports/junit.xml npx playwright test --reporter=junit
+            report:
+              type: junit
+              paths:
+                - .harness/reports/junit.xml
+  tags:
+    onboarding: "true"
