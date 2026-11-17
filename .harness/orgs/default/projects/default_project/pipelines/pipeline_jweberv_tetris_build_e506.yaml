@@ -1,6 +1,7 @@
 pipeline:
   id: pipeline_jweberv_tetris_build_e506
   name: pipeline_jweberv_tetris_build_e506
+  description: Builds and tests the Tetris app, then builds and pushes its Docker image to Docker Hub.
   stages:
     - name: Build and Test
       id: build_and_test
@@ -43,5 +44,24 @@ pipeline:
               type: junit
               paths:
                 - .harness/reports/junit.xml
+    - name: Build and Push Image
+      id: build_and_push_image
+      runtime: cloud
+      platform:
+        os: linux
+        arch: amd64
+      clone:
+        enabled: true
+      steps:
+        - name: Build and Push to Docker Hub
+          id: push_docker_image
+          build:
+            uses: buildAndPushToDocker
+            with:
+              connector: connector_DockerRegistry_f949
+              repo: jwebz/tetris
+              tags:
+                - 1.0.0
   tags:
     onboarding: "true"
+    ai_generated: ""
